@@ -1,16 +1,16 @@
 import axios from "axios";
-import { AuthResponse, LoginInfo } from "../types/auth";
+import { AuthResponse, AuthInfo } from "../types/auth";
 
 const axiosInstance = axios.create({
-    baseURL: "https://localhost:8080",
+    baseURL: "http://localhost:8080",
 });
 
 export const login = async ({
     email,
     password,
-}: LoginInfo): Promise<AuthResponse> => {
+}: AuthInfo): Promise<AuthResponse> => {
     const { data } = await axiosInstance({
-        url: "/login",
+        url: "/users/login",
         method: "POST",
         data: {
             email,
@@ -24,9 +24,9 @@ export const login = async ({
 export const signUp = async ({
     email,
     password,
-}: LoginInfo): Promise<AuthResponse> => {
+}: AuthInfo): Promise<AuthResponse> => {
     const { data } = await axiosInstance({
-        url: "/create",
+        url: "/users/create",
         method: "POST",
         data: {
             email,

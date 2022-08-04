@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 const useLocalStorage = <T>(key: string, initialValue: T) => {
-    const [storageValue, setStorageValue] = useState<T>(() => {
+    const [storageValue, setStorageValue] = useState<T | undefined>(() => {
         const item = window.localStorage.getItem(key);
         return item ? JSON.parse(item) : initialValue;
     });
@@ -13,6 +13,7 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
 
     const deleteValue = useCallback(() => {
         window.localStorage.removeItem(key);
+        setStorageValue(undefined);
     }, []);
 
     return [storageValue, setValue, deleteValue] as const;
