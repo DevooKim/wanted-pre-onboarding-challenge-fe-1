@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
     useAuthActionContext,
     useAuthStateContext,
-} from "../../context/AuthContext";
-import { AuthInfo } from "../../types/auth";
+} from "../context/AuthContext";
+import { AuthInfo } from "../types/auth";
 
 const LoginPage = () => {
     const { isLogin } = useAuthStateContext();
@@ -34,7 +34,8 @@ const LoginPage = () => {
     }, [isLogin]);
 
     return (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex flex-col justify-center items-center h-full">
+            <h1 className="mb-5">Login</h1>
             <form
                 className="form-control gap-2 w-96"
                 onSubmit={handleSubmit(onSubmit)}
