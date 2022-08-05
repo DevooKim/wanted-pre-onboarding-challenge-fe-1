@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
     useAuthActionContext,
     useAuthStateContext,
-} from "../../context/AuthContext";
+} from "../context/AuthContext";
 
 const AuthButton = () => {
     const { isLogin } = useAuthStateContext();
@@ -24,7 +24,7 @@ const AuthButton = () => {
                     logout
                 </button>
             ) : (
-                <div>
+                <div className="flex gap-2">
                     <button className="btn btn-sm" onClick={goLogin}>
                         login
                     </button>
