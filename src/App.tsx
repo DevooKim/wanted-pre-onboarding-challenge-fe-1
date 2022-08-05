@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import Layout from "./Components/Layout";
 import RequireAuth from "./Components/RequireAuth";
 import { AuthContext } from "./context/AuthContext";

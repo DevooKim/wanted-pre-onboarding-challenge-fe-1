@@ -20,11 +20,17 @@ const AuthButton = () => {
     return (
         <>
             {isLogin ? (
-                <button onClick={logoutHandler}>logout</button>
+                <button className="btn btn-sm" onClick={logoutHandler}>
+                    logout
+                </button>
             ) : (
                 <div>
-                    <button onClick={goLogin}>login</button>
-                    <button onClick={goSignUp}>signUp</button>
+                    <button className="btn btn-sm" onClick={goLogin}>
+                        login
+                    </button>
+                    <button className="btn btn-sm" onClick={goSignUp}>
+                        signUp
+                    </button>
                 </div>
             )}
         </>
