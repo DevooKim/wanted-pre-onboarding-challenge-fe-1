@@ -34,10 +34,10 @@ const LoginPage = () => {
     }, [isLogin]);
 
     return (
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="flex flex-col items-center justify-center h-full">
             <h1 className="mb-5">Login</h1>
             <form
-                className="form-control gap-2 w-96"
+                className="gap-2 form-control w-96"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <input

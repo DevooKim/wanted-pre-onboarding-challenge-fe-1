@@ -1,25 +1,22 @@
-import { useCallback } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import AuthButton from "./AuthButton";
 
 const Layout = () => {
-    const navigate = useNavigate();
-
-    const onClickLogo = useCallback(() => navigate("/"), []);
-
     return (
         <div id="container" className="w-full h-screen">
-            <div
-                id="header"
-                className="w-full flex justify-between items-center h-12 border-2"
-            >
-                <div
-                    className="select-none cursor-pointer"
-                    onClick={onClickLogo}
-                >
-                    Wanted Challenge Fe1
+            <div id="header" className="justify-between border-2 navbar">
+                <div className="shrink-0">
+                    <div className="select-none">Wanted Challenge Fe1</div>
                 </div>
-                <AuthButton />
+                <div className="px-6 shrink-0">
+                    <div className="flex gap-4">
+                        <Link to="/">HOME</Link>
+                        <Link to="/todo">TO DO</Link>
+                    </div>
+                </div>
+                <div className="">
+                    <AuthButton />
+                </div>
             </div>
             <Outlet />
         </div>
