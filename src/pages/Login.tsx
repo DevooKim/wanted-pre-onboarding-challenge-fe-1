@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (isLogin) {
-            return navigate('/');
+            return navigate("/");
         }
     }, [isLogin]);
 
@@ -59,11 +59,13 @@ const LoginPage = () => {
                     {...register("password", { required: true, minLength: 8 })}
                     placeholder="password"
                 />
-                <input
+                <button
                     className="input input-bordered input-accent input-sm"
                     type="submit"
                     disabled={!isValid}
-                />
+                >
+                    로그인
+                </button>
             </form>
         </div>
     );
