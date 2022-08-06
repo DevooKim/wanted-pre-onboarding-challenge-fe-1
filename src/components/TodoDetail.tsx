@@ -55,7 +55,6 @@ const TodoDetail = () => {
                     ) : (
                         <input
                             className="h-10 p-2 text-sm input input-bordered input-accent"
-                            // value={todo?.title}
                             {...register("title", {
                                 required: true,
                                 value: todo?.title,
@@ -73,7 +72,6 @@ const TodoDetail = () => {
                     ) : (
                         <textarea
                             className="h-full p-2 text-sm textarea textarea-bordered textarea-accent"
-                            // value={todo?.content}
                             {...register("content", {
                                 required: true,
                                 value: todo?.content,

@@ -77,7 +77,6 @@ export const TodoContext = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     useDidMountEffect(() => {
-        console.log("fetch");
         getTodoList();
     }, []);
 
