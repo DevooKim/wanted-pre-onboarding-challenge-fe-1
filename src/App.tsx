@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import { AuthContext } from "./context/AuthContext";
+import Home from "./pages/Home";
 import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/Signup";
 import TodoRoutes from "./routes/TodoRoutes";
-
-const Home = () => <h1>HOME</h1>;
 
 const App = () => (
     <AuthContext>
