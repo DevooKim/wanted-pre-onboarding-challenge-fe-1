@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (isLogin) {
-            return navigate(-1);
+            return navigate('/');
         }
     }, [isLogin]);
 
