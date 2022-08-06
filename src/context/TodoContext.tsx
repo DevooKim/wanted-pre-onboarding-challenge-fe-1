@@ -1,10 +1,11 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 
 import { Todo, TodoInput } from "../types/todo";
 import todoApi from "../apis/todo";
+import useDidMountEffect from "../hooks/useDidMountEffect";
 
 interface IActionContext {
-    getTodos: () => Promise<Todo[]> | void;
+    getTodoList: () => Promise<Todo[]> | void;
     getTodo: (id: string) => Promise<Todo> | void;
     createTodo: (todo: TodoInput) => void;
     updateTodo: (todo: Pick<Todo, "id" | "title" | "content">) => void;
@@ -12,7 +13,7 @@ interface IActionContext {
 }
 
 const defaultActionState = {
-    getTodos: () => {},
+    getTodoList: () => {},
     getTodo: () => {},
     createTodo: () => {},
     updateTodo: () => {},
@@ -22,13 +23,16 @@ const defaultActionState = {
 const TodoStateContext = createContext<Todo[]>([]);
 const TodoActionContext = createContext<IActionContext>(defaultActionState);
 
+export const useTodoStateContext = () => useContext(TodoStateContext);
+export const useTodoActionContext = () => useContext(TodoActionContext);
+
 export const TodoContext = ({ children }: { children: React.ReactNode }) => {
-    const [todos, setTodos] = useState<Todo[]>([]);
+    const [todoList, setTodoList] = useState<Todo[]>([]);
 
     const createTodo = useCallback(async ({ title, content }: TodoInput) => {
         const todo = await todoApi.createTodo({ title, content });
         if (todo.id) {
-            setTodos((prev) => [...prev, todo]);
+            setTodoList((prev) => [...prev, todo]);
         }
     }, []);
 
@@ -37,9 +41,9 @@ export const TodoContext = ({ children }: { children: React.ReactNode }) => {
         return todo;
     }, []);
 
-    const getTodos = useCallback(async () => {
-        const todo = await todoApi.getTodos();
-        setTodos(todo);
+    const getTodoList = useCallback(async () => {
+        const todo = await todoApi.getTodoList();
+        setTodoList(todo);
         return todo;
     }, []);
 
@@ -50,7 +54,7 @@ export const TodoContext = ({ children }: { children: React.ReactNode }) => {
             content,
         }: Pick<Todo, "id" | "title" | "content">) => {
             const todo = await todoApi.updateTodo({ id, title, content });
-            setTodos((prev) => {
+            setTodoList((prev) => {
                 const _prev = [...prev];
                 const todoIndex = prev.findIndex((todo) => todo.id === id);
                 if (todoIndex >= 0) {
@@ -64,7 +68,7 @@ export const TodoContext = ({ children }: { children: React.ReactNode }) => {
 
     const deleteTodo = useCallback(async (id: string) => {
         await todoApi.deleteTodo(id);
-        setTodos((prev) => {
+        setTodoList((prev) => {
             const _prev = [...prev];
             const todoIndex = prev.findIndex((todo) => todo.id === id);
             _prev.splice(todoIndex, 1);
@@ -72,18 +76,18 @@ export const TodoContext = ({ children }: { children: React.ReactNode }) => {
         });
     }, []);
 
-    useEffect(() => {
+    useDidMountEffect(() => {
         console.log("fetch");
-        getTodos();
+        getTodoList();
     }, []);
 
     return (
-        <TodoStateContext.Provider value={todos}>
+        <TodoStateContext.Provider value={todoList}>
             <TodoActionContext.Provider
                 value={{
                     createTodo,
                     getTodo,
-                    getTodos,
+                    getTodoList,
                     updateTodo,
                     deleteTodo,
                 }}

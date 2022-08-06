@@ -1,5 +1,5 @@
 import { AuthResponse, AuthInfo } from "../types/auth";
-import { axiosInstance } from "./axiosInstance";
+import axiosInstance from "./axiosInstance";
 
 export const login = async ({
     email,
@@ -14,10 +14,6 @@ export const login = async ({
         },
     });
 
-    const { token } = data;
-    if (token) {
-        axiosInstance.defaults.headers.common["Authorization"] = token;
-    }
     return data;
 };
 

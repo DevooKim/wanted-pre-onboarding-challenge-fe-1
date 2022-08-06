@@ -7,18 +7,28 @@ import TodoRoutes from "./routes/TodoRoutes";
 
 const Home = () => <h1>HOME</h1>;
 
-const App = () => (
-    <AuthContext>
-        <Routes>
-            <Route element={<Layout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
+const setScreenSize = () => {
+    let vh = window.innerHeight * 0.01;
 
-                <Route path="/todo*" element={<TodoRoutes />} />
-            </Route>
-        </Routes>
-    </AuthContext>
-);
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
+
+const App = () => {
+    setScreenSize();
+
+    return (
+        <AuthContext>
+            <Routes>
+                <Route element={<Layout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignUpPage />} />
+
+                    <Route path="/todo*" element={<TodoRoutes />} />
+                </Route>
+            </Routes>
+        </AuthContext>
+    );
+};
 
 export default App;

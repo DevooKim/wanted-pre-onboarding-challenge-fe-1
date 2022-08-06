@@ -1,22 +1,22 @@
 import { Todo, TodoInput } from "../types/todo";
-import { axiosInstance } from "./axiosInstance";
+import axiosInstance from "./axiosInstance";
 
-const getTodos = async (): Promise<Todo[]> => {
+const getTodoList = async (): Promise<Todo[]> => {
     const { data } = await axiosInstance({
         url: "/todos",
         method: "GET",
     });
 
-    return data;
+    return data.data;
 };
 
 const getTodo = async (id: string): Promise<Todo> => {
     const { data } = await axiosInstance({
-        url: `/todo/${id}`,
+        url: `/todos/${id}`,
         method: "GET",
     });
 
-    return data;
+    return data.data;
 };
 
 const createTodo = async ({ title, content }: TodoInput): Promise<Todo> => {
@@ -29,7 +29,7 @@ const createTodo = async ({ title, content }: TodoInput): Promise<Todo> => {
         },
     });
 
-    return data;
+    return data.data;
 };
 
 const updateTodo = async ({
@@ -46,20 +46,20 @@ const updateTodo = async ({
         },
     });
 
-    return data;
+    return data.data;
 };
 
 const deleteTodo = async (id: string): Promise<null> => {
     const { data } = await axiosInstance({
-        url: `/todo/${id}`,
+        url: `/todos/${id}`,
         method: "DELETE",
     });
 
-    return data;
+    return data.data;
 };
 
 export default {
-    getTodos,
+    getTodoList,
     getTodo,
     createTodo,
     updateTodo,

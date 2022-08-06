@@ -3,7 +3,7 @@ import AuthButton from "./AuthButton";
 
 const Layout = () => {
     return (
-        <div id="container" className="w-full h-screen">
+        <div id="container" className="w-full min-h-screen">
             <div id="header" className="justify-between border-2 navbar">
                 <div className="shrink-0">
                     <div className="text-xl normal-case select-none">
@@ -24,7 +24,7 @@ const Layout = () => {
                     <AuthButton />
                 </div>
             </div>
-            <div className="p-4">
+            <div className="h-full p-4 ">
                 <Outlet />
             </div>
         </div>

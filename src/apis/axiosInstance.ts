@@ -1,5 +1,18 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
-export const axiosInstance = axios.create({
+const axiosInstance = axios.create({
     baseURL: "http://localhost:8080",
 });
+
+axiosInstance.interceptors.request.use(
+    (req: AxiosRequestConfig): AxiosRequestConfig => {
+        const token = window.localStorage.getItem("loginToken");
+        if (token) {
+            req.headers.Authorization = token;
+        }
+
+        return req;
+    }
+);
+
+export default axiosInstance
