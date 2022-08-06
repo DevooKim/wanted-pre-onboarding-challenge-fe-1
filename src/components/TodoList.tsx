@@ -10,10 +10,16 @@ const TodoList = () => {
     };
 
     return (
-        <div>
+        <div className="h-full p-3 overflow-auto">
             {todolist.map((v) => (
                 <div key={v.id}>
-                    <div onClick={() => detailHandler(v.id)}>{v.title}</div>
+                    <div
+                        className="text-center cursor-pointer"
+                        onClick={() => detailHandler(v.id)}
+                    >
+                        {v.title}
+                    </div>
+                    <div className="my-1 divider" />
                 </div>
             ))}
         </div>

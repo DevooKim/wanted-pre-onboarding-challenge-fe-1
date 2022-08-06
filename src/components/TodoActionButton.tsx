@@ -48,7 +48,7 @@ function TodoActionButton({
             </button>
             <button
                 className="btn btn-sm"
-                // onClick={() => deleteHandler(todo?.id)}
+                onClick={() => deleteHandler(todo?.id)}
             >
                 삭제
             </button>

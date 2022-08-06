@@ -4,9 +4,9 @@ import TodoList from "../components/TodoList";
 
 const TodoPage = () => {
     return (
-        <div className="flex flex-row w-full">
-            <div className="w-full border grow">
-                <div>
+        <div className="flex flex-row w-full h-full">
+            <div className="w-full h-full border grow">
+                <div className="flex flex-col h-full overflow-hidden">
                     <TodoCreate />
                     <TodoList />
                 </div>
