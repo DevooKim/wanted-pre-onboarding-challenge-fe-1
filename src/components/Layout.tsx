@@ -1,3 +1,4 @@
+import {memo} from 'react'
 import { Link, Outlet } from "react-router-dom";
 import AuthButton from "./AuthButton";
 
@@ -31,4 +32,4 @@ const Layout = () => {
     );
 };
 
-export default Layout;
+export default memo(Layout);
