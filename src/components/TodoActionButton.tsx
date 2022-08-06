@@ -1,4 +1,5 @@
 import { useCallback, Dispatch, SetStateAction } from "react";
+import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useTodoActionContext } from "../context/TodoContext";
 import { Todo } from "../types/todo";
@@ -17,15 +18,16 @@ function TodoActionButton({
 }) {
     const { updateTodo, deleteTodo } = useTodoActionContext();
     const navigate = useNavigate();
+    const { getValues, reset } = useFormContext();
 
     const applyHandler = useCallback(async (todo: Todo) => {
-        const dummy = {
+        const updateValue = {
             id: todo?.id,
-            title: "hi1a123asd123dd",
-            content: "hello3",
+            title: getValues("title"),
+            content: getValues("content"),
         };
-        await updateTodo(dummy);
-        setTodo({ ...todo, ...dummy });
+        await updateTodo(updateValue);
+        setTodo({ ...todo, ...updateValue });
         onChangeMode(Mode.read);
     }, []);
 
@@ -34,23 +36,32 @@ function TodoActionButton({
         navigate("/todo", { replace: true });
     }, []);
 
+    const cancelHandler = useCallback(() => {
+        reset();
+        onChangeMode(Mode.read);
+    }, []);
+
     return (
-        <div>
+        <div className="flex w-full gap-4">
             <button
-                className="btn btn-sm"
+                className="flex-1 btn btn-sm"
                 onClick={() =>
                     mode === Mode.read
                         ? onChangeMode(Mode.edit)
                         : applyHandler(todo)
                 }
             >
-                {mode === Mode.read ? "업데이트" : "적용"}
+                {mode === Mode.read ? "수정" : "적용"}
             </button>
             <button
-                className="btn btn-sm"
-                onClick={() => deleteHandler(todo?.id)}
+                className="flex-1 btn btn-sm"
+                onClick={() =>
+                    mode === Mode.read
+                        ? deleteHandler(todo?.id)
+                        : cancelHandler()
+                }
             >
-                삭제
+                {mode === Mode.read ? "삭제" : "취소"}
             </button>
         </div>
     );
